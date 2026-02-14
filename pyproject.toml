@@ -80,8 +80,6 @@ module = [
 ]
 ignore_missing_imports = true
 
-[tool.setuptools_scm]
-
 [dependency-groups]
 dev = [
     "xarray_sql[test]",
