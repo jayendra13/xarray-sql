@@ -189,6 +189,12 @@ jobs:
           sleep 3
           uv pip install --extra-index-url https://test.pypi.org/simple --upgrade de
           python -c "import xarray_sql; print(xarray_sql.__version__)"
+      - name: Validate wheels
+        run: |
+          pip install twine
+          twine check dist/*
+          unzip -t dist/*.whl
+
   upload-to-pypi:
     needs: verify-built-dist
     runs-on: ubuntu-latest
