@@ -104,31 +104,31 @@ jobs:
           name: dist-manylinux-x86_64
           path: target/wheels/*
 
-  build-artifacts-manylinux-arm64:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
+  # build-artifacts-manylinux-arm64:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v5
 
-      - name: Get tags
-        run: git fetch --tags origin --force  # force needed to make re-releases
+  #     - name: Get tags
+  #       run: git fetch --tags origin --force  # force needed to make re-releases
 
-      - name: Build wheels for manylinux arm64
-        uses: PyO3/maturin-action@v1
-        env:
-          RUST_BACKTRACE: 1
-        with:
-          rust-toolchain: stable
-          target: aarch64
-          # Use manylinux_2_28-cross because the manylinux2014-cross has GCC 4.8.5, which causes the build to fail
-          manylinux: 2_28
-          rustup-components: rust-std rustfmt
-          sccache: 'true'
-          args: --release -i python3.10 python3.11 python3.12 python3.13
+  #     - name: Build wheels for manylinux arm64
+  #       uses: PyO3/maturin-action@v1
+  #       env:
+  #         RUST_BACKTRACE: 1
+  #       with:
+  #         rust-toolchain: stable
+  #         target: aarch64
+  #         # Use manylinux_2_28-cross because the manylinux2014-cross has GCC 4.8.5, which causes the build to fail
+  #         manylinux: 2_28
+  #         rustup-components: rust-std rustfmt
+  #         sccache: 'true'
+  #         args: --release -i python3.10 python3.11 python3.12 python3.13
 
-      - uses: actions/upload-artifact@v4
-        with:
-          name: dist-manylinux-aarch64
-          path: target/wheels/*
+  #     - uses: actions/upload-artifact@v4
+  #       with:
+  #         name: dist-manylinux-aarch64
+  #         path: target/wheels/*
 
   build-sdist:
     name: Source distribution
